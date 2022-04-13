@@ -1,6 +1,16 @@
 version: 1
 task_definition:
-  services:
-    web:
-      cpu_shares: 100
-      mem_limit: 524288000
+  ecs_network_mode: awsvpc
+  os_family: Linux
+  task_size:
+    mem_limit: 0.5GB
+    cpu_limit: 256
+run_params:
+  network_configuration:
+    awsvpc_configuration:
+      subnets:
+        - "subnet-d97f9eb2"
+        - "subnet-35e57d4e"
+      security_groups:
+        - "sg-0fbdd6f15b93fdf90"
+      assign_public_ip: ENABLED
