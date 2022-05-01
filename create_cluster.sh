@@ -1,4 +1,8 @@
 #!/bin/bash
+aws ecr delete-repository \
+    --repository-name jenkins-cicd \
+    --force
+    
 aws iam --region ap-south-1 create-role --role-name ecsTaskExecutionRole \
 --assume-role-policy-document file://task-execution-assume-role.json
 

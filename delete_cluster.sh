@@ -4,3 +4,7 @@ ecs-cli compose --project-name tutorial service down \
 
 ecs-cli down --force --cluster-config tutorial \
 --ecs-profile tutorial-profile
+
+aws ecr delete-repository \
+    --repository-name jenkins-cicd \
+    --force
