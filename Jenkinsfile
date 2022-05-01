@@ -14,6 +14,16 @@ pipeline {
         }
       }
     }
+
+    stage('Create AWS ECR repo') {
+        steps{
+            script{
+                sh "aws ecr create-repository \
+    --repository-name jenkins-cicd"
+                }
+            }
+        }
+    }
     stage('Push Image to AWS ECR') {
         steps{
             script{
