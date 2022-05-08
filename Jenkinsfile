@@ -48,9 +48,9 @@ pipeline {
                 }
             }
         }
-    }
     else {
-    sh "chmod +x ./delete_cluster.sh"
-    sh "./delete_cluster.sh"
-  }
+        sh "chmod +x ./delete_cluster.sh"
+        sh "./delete_cluster.sh"
+      }
+    }
 }
