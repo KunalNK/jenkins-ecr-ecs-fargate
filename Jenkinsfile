@@ -1,9 +1,9 @@
 pipeline {
-  environment {
-    registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
-    registryCredential = 'aws-ecr'
-    // dockerImage = ''
-  }
+  // environment {
+  //   registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+  //   registryCredential = 'aws-ecr'
+  //   // dockerImage = ''
+  // }
   agent any
   stages {
     stage('Create ECR repo in AWS') {
@@ -22,8 +22,8 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-          dockerImage = docker.build registry + ":latest"
-          sh 'echo $dockerImage'
+            app = docker.build("underwater")
+          sh 'echo $app'
         }
       }
     }
@@ -33,8 +33,9 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential) {
-                dockerImage.push()
+                    docker.withRegistry('https://349443600135.dkr.ecr.ap-south-1.amazonaws.com', 'ecr:ap-south-1:aws-credentials') {
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
                 }
             }
         }
