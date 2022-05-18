@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com'
+    registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com:jenkins-cicd'
     registryCredential = 'aws-ecr'
     // dockerImage = ''
   }
@@ -35,7 +35,7 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
           script{
               if (env_type=='create'){
-                   docker.withRegistry("https://" + registry, "ecr:ap-south-1:"){
+                   docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential){
                     dockerImage.push()
                 }
             }
