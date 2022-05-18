@@ -29,7 +29,6 @@ pipeline {
             script{
               if (env_type=='create'){
                     docker.withRegistry('https://349443600135.dkr.ecr.ap-south-1.amazonaws.com', 'ecr:ap-south-1:aws-ecr') {
-                    app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                 }
             }
