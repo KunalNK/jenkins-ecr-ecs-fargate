@@ -20,7 +20,6 @@ pipeline {
     }
     stage('Building image') {
       steps{
-        withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
         script {
           if (env_type=='create'){
           dockerImage = docker.build registry + ":latest"
@@ -29,14 +28,13 @@ pipeline {
       }
     }
     }
-    }
     stage('Push Image to AWS ECR') {
         steps{
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
-          script{
+            script{
               if (env_type=='create'){
-                   docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential){
-                    dockerImage.push()
+                docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential) {
+                dockerImage.push()
                 }
             }
         }
