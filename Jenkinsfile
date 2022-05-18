@@ -22,7 +22,7 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-            app = docker.build("underwater")
+            app = docker.build("jenkins-cicd")
           sh 'echo $app'
         }
       }
@@ -33,7 +33,7 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                    docker.withRegistry('https://349443600135.dkr.ecr.ap-south-1.amazonaws.com', 'ecr:ap-south-1:aws-credentials') {
+                    docker.withRegistry('https://349443600135.dkr.ecr.ap-south-1.amazonaws.com', 'ecr:ap-south-1:aws-ecr') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                 }
