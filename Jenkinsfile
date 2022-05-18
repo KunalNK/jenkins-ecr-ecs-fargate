@@ -18,7 +18,7 @@ pipeline {
         script {
           if (env_type=='create'){
             app = docker.build("jenkins-cicd")
-          sh echo '$app'
+          sh 'echo app'
         }
       }
     }
