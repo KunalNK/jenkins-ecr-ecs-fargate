@@ -58,7 +58,7 @@ pipeline {
     }
     
     
-    stage('Deploy docker image to AWS ECS container') {
+    stage('Deploy docker image to AWS ECS Fargate container') {
             steps {
                 withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
                   script{
