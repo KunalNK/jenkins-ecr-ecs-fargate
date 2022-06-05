@@ -1,7 +1,11 @@
 version: '3'
 services:
   web:
+<<<<<<< HEAD
     image: accid/image_name:image_tag
+=======
+    image: <>.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd:latest
+>>>>>>> e473facaef7c98173e2c306d473fbfacd634267c
     ports:
       - "5000:5000"
     logging:
